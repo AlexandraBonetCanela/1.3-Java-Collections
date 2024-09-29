@@ -3,6 +3,7 @@ package org.alexandra;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) {
@@ -33,6 +34,11 @@ public class Main {
         yearSet.add(new Month("August"));
         printMonths(yearSet, "Duplicated August silently ignored: ");
 
+        System.out.println("\nUsing iterator:\n");
+        Iterator<Month> iterator = yearSet.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next().getName());
+        }
     }
 
     public static void printMonths(Collection<Month> year,String message) {
