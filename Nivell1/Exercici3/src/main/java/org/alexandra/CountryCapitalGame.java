@@ -38,12 +38,10 @@ public class CountryCapitalGame {
             System.out.println("Enter the capital of " + country + ":");
             capital = scanner.nextLine();
             if(countryCapitalList.get(country).equalsIgnoreCase(capital)) {
-                this.score+=1;
-                System.out.println("The capital of " + country + " is " + countryCapitalList.get(country) + " You are correct");
-            } else {
-                System.out.println("The capital of " + country + " is not correct, it is " + countryCapitalList.get(country));
+                this.score += 1;
             }
         }
+        scanner.close();
         System.out.println("Total score: "+ this.score);
         return this.score;
     }
