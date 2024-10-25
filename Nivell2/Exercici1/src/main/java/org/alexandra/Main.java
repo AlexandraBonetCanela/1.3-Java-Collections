@@ -5,8 +5,7 @@ import java.util.HashSet;
 
 public class Main {
     public static void main(String[] args) {
-
-        // Exercise 1
+        
         HashSet<Restaurant> restaurantHashSet = new HashSet<>();
 
         restaurantHashSet.add(new Restaurant("Dirty Burger", 6));
