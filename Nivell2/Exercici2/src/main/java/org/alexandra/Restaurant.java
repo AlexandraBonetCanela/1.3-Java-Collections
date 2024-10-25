@@ -2,7 +2,7 @@ package org.alexandra;
 
 import java.util.Objects;
 
-public class Restaurant {
+public class Restaurant implements Comparable<Restaurant> {
     private String name;
     private int score;
 
@@ -30,5 +30,14 @@ public class Restaurant {
     @Override
     public int hashCode() {
         return Objects.hash(name, score);
+    }
+
+    @Override
+    public int compareTo(Restaurant restaurant) {
+        if(this.name.compareTo(restaurant.name) != 0){
+            return this.name.compareTo(restaurant.name);
+        } else {
+            return restaurant.score - this.score;
+        }
     }
 }
