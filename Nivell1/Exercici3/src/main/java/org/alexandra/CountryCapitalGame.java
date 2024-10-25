@@ -17,7 +17,14 @@ public class CountryCapitalGame {
     public static void main(String[] args) {
         CountryCapitalGame game = new CountryCapitalGame();
 
-        HashMap<String,String> countryCapitalList = game.loadFile();
+        HashMap<String,String> countryCapitalList = null;
+
+        try {
+            countryCapitalList = game.loadFile();
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+            return;
+        }
 
         game.userName = game.askUserName();
 
@@ -69,21 +76,19 @@ public class CountryCapitalGame {
         }
     }
 
-    public HashMap<String,String> loadFile(){
+    public HashMap<String,String> loadFile() throws IOException{
         HashMap<String,String> countryCapital = new HashMap<>();
         InputStream countriesFile = CountryCapitalGame.class.getClassLoader().getResourceAsStream("countries.txt");
 
         if (countriesFile == null) {
-            System.out.println("countries.txt file not found");
-            System.exit(1);
+            throw new FileNotFoundException("countries.txt file not found");
         }
 
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(countriesFile));
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(countriesFile))){
             String line;
-            while ((line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 line = line.trim();
-                if(line.isEmpty()){
+                if (line.isEmpty()) {
                     continue;
                 }
                 String[] pair = line.split(" ");
@@ -91,11 +96,8 @@ public class CountryCapitalGame {
                 for (int i = 0; i < pair.length; i++) {
                     pair[i] = pair[i].replace("_", " ");
                 }
-                countryCapital.put(pair[0],pair[1]);
+                countryCapital.put(pair[0], pair[1]);
             }
-        } catch (IOException e) {
-            System.out.println("Could not read countries.txt file");
-            System.exit(1);;
         }
         return countryCapital;
     }
